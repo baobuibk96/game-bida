@@ -1,0 +1,38 @@
+class SettingsLayer
+showSettingsLayer
+onClickExit
+onClickConnect
+PlayerRegisteringState
+MiniBillar.Avatar
+startScrolledDown
+NameInputLayer
+showNameInputLayer
+googlePlayButton
+PlayerAvatarContainer
+onClickAvatarEdit
+hideSettingsLayer
+
+SplashState
+
+
+        MiniBillar.GameVars.gameData.playerData.nick = this.nameInput.value;
+        MiniBillar.GameManager.writeGameData();
+
+this.fakeNameInput = new Phaser.Text(
+          this.game,
+          -105,
+          -this.fullBodyAvatar.height - 45,
+          this.lastValidPlayerName,
+          {
+            font: "30px Oswald-Medium",
+            fill: "#E5FFFF",
+          }
+        );
+        this.fakeNameInput.inputEnabled = true;
+        this.fakeNameInput.events.onInputUp.add(function () {
+          MiniBillar.PlayerRegisteringState.currentInstance.showNameInputLayer();
+        }, this);
+        this.fakeNameInput.setText(
+          MiniBillar.Utils.truncateName(this.lastValidPlayerName, 12)
+        );
+        this.add(this.fakeNameInput);
